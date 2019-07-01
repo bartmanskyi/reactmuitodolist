@@ -1,8 +1,8 @@
 import React from 'react';
-import TodoListItem from './todo-list-item';
+import TodoListItem from '../todo-list-item';
 import List from '@material-ui/core/List';
 
-
+import './todo-list.css';
 
 const TodoList = (classes) => {
 	const todos = [ 
