@@ -4,20 +4,17 @@ import List from '@material-ui/core/List';
 
 import './todo-list.css';
 
-const TodoList = (classes) => {
-	const todos = [ 
-		{ label: 'Drink Coffee', important: false }, 
-		{ label: 'Build React App', important: true },
-		{ label: 'Git Commit', important: false },
-		{ label: 'Git Push', important: false },
+const TodoList = () => {
+	const todos = [
+		{ id: 0, label: 'Drink Coffee', important: false },
+		{ id: 1, label: 'Build React App', important: true },
+		{ id: 2, label: 'Git Commit', important: false },
+		{ id: 3, label: 'Git Push', important: false }
 	];
-	return (
-		<List className={classes.list}>
-			{todos.map(({label, important}) => (
-
-				<TodoListItem label={label} important={important} />
-			))}
-		</List>
-	);
+	const elements = todos.map((item) => {
+		const { id, ...itemProps } = item;
+		return <TodoListItem {...itemProps} key={id} />;
+	});
+	return <List>{elements}</List>;
 };
 export default TodoList;

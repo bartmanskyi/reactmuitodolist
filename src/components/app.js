@@ -12,13 +12,13 @@ import withRoot from '../withRoot';
 const styles = (theme) => ({
 	root: {
 		textAlign: 'center',
-		paddingTop: theme.spacing.unit * 20,
+		paddingTop: theme.spacing(20),
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
-		marginLeft: theme.spacing.unit * 3,
-		marginRight: theme.spacing.unit * 3,
-		[theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-			width: 400,
+		marginLeft: theme.spacing(3),
+		marginRight: theme.spacing(3),
+		[theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+			maxWidth: 600,
 			marginLeft: 'auto',
 			marginRight: 'auto'
 		}
@@ -29,7 +29,7 @@ const styles = (theme) => ({
 	},
 	list: {
 		width: '100%',
-		maxWidth: 360
+		maxWidth: 560
 	},
 	dense: {
 		marginTop: 16
