@@ -13,10 +13,10 @@ import './search-panel.css';
 
 const styles = {
 	root: {
-		padding: '2px 4px',
+		padding: '8px 8px',
 		display: 'flex',
 		alignItems: 'center',
-		maxWidth: 590
+		maxWidth: 480
 	},
 	input: {
 		marginLeft: 8,

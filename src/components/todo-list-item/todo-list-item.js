@@ -7,13 +7,25 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import StarIconBorder from '@material-ui/icons/StarBorder';
+import Typography from '@material-ui/core/Typography';
 
 import './todo-list-item.css';
+import { withStyles } from '@material-ui/core/styles';
 
-const TodoListItem = ({ label, important = false }) => {
-    const listItemStyle = {
-        color: important ? 'tomato' : 'black'
-    }
+const styles = (theme) => ({
+	listItemTextBold: {
+		fontWeight: 500
+	},
+	listItemTextNormal: {
+		fontWeight: 300
+	}
+});
+
+const TodoListItem = ({ classes, label, important = false }) => {
+	const listItemStyle = {
+		color: important ? 'tomato' : 'black'
+	};
+
 	return (
 		// <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
 		//     <Checkbox checked={this.state.checked.indexOf(value) !== -1} tabIndex={-1} disableRipple />
@@ -24,20 +36,28 @@ const TodoListItem = ({ label, important = false }) => {
 		//         </IconButton>
 		//     </ListItemSecondaryAction>
 		// </ListItem>
-		<ListItem role={undefined} dense button style={listItemStyle}>
-			{/* <ListItemIcon>
+		<Typography component="div">
+			<ListItem
+				role={undefined}
+				button
+				style={listItemStyle}
+				className="todo-list-item"
+			>
+				{/* <ListItemIcon>
 				<StarIconBorder />
 			</ListItemIcon> */}
-			<ListItemText primary={label} />
-			<ListItemSecondaryAction>
-				<IconButton>
-					<StarIconBorder />
-				</IconButton>
-				<IconButton>
-					<DeleteIcon />
-				</IconButton>
-			</ListItemSecondaryAction>
-		</ListItem>
+				<ListItemText primary={label} classes={{ primary: important ? classes.listItemTextBold : classes.listItemTextNormal }}/>
+				<ListItemSecondaryAction>
+					<IconButton>
+						<StarIconBorder />
+					</IconButton>
+					<IconButton>
+						<DeleteIcon />
+					</IconButton>
+				</ListItemSecondaryAction>
+			</ListItem>
+		</Typography>
 	);
 };
-export default TodoListItem;
+
+export default withStyles(styles)(TodoListItem);

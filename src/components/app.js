@@ -6,6 +6,7 @@ import AppHeader from './app-header';
 import SearchPanel from './search-panel';
 import TodoList from './todo-list';
 
+
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from '../withRoot';
 
@@ -17,23 +18,23 @@ const styles = (theme) => ({
 		display: 'block', // Fix IE 11 issue.
 		marginLeft: theme.spacing(3),
 		marginRight: theme.spacing(3),
-		[theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-			maxWidth: 600,
+		[theme.breakpoints.up(480 + theme.spacing(3) * 2)]: {
+			maxWidth: 480,
 			marginLeft: 'auto',
 			marginRight: 'auto'
 		}
 	},
-	container: {
-		display: 'flex',
-		flexWrap: 'wrap'
-	},
+	// container: {
+	// 	display: 'flex',
+	// 	flexWrap: 'wrap'
+	// },
 	list: {
 		width: '100%',
-		maxWidth: 560
+		maxWidth: 480
 	},
-	dense: {
-		marginTop: 16
-	}
+	// dense: {
+	// 	marginTop: 16
+	// }
 });
 
 class Index extends React.Component {

@@ -15,6 +15,6 @@ const TodoList = () => {
 		const { id, ...itemProps } = item;
 		return <TodoListItem {...itemProps} key={id} />;
 	});
-	return <List>{elements}</List>;
+	return <List className="todo-list">{elements}</List>;
 };
 export default TodoList;
