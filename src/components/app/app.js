@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-import AppHeader from './app-header';
-import SearchPanel from './search-panel';
-import TodoList from './todo-list';
+import AppHeader from '../app-header';
+import SearchPanel from '../search-panel';
+import TodoList from '../todo-list';
 
 
 import { withStyles } from '@material-ui/core/styles';
-import withRoot from '../withRoot';
+import withRoot from './withRoot';
 
 const styles = (theme) => ({
 	root: {
