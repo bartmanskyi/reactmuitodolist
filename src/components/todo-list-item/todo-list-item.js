@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import ClassNames from 'classnames';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
@@ -17,28 +18,52 @@ const styles = (theme) => ({
 	},
 	listItemTextNormal: {
 		fontWeight: 300
+	},
+	listItemTextCompleted: {
+		textDecoration: 'line-through'
+	},
+	listItemTextNotCompleted: {
+		textDecoration: 'none'
 	}
 });
+class TodoListItem extends Component {
+	constructor() {
+		super();
+		this.onLableClick = () => {
+			console.log(`Done: ${this.props.label}`);
+		};
+		this.state = {
+			done: false
+		};
+	}
 
-const TodoListItem = ({ classes, label, important = false }) => {
-	return (
-		<Typography component="div">
-			<ListItem role={undefined} button className="todo-list-item">
-				<ListItemText
-					primary={label}
-					classes={{ primary: important ? classes.listItemTextImportant : classes.listItemTextNormal }}
-				/>
-				<ListItemSecondaryAction>
-					<IconButton>
-						<StarIconBorder />
-					</IconButton>
-					<IconButton>
-						<DeleteIcon />
-					</IconButton>
-				</ListItemSecondaryAction>
-			</ListItem>
-		</Typography>
-	);
-};
+	render() {
+		const { classes, label, important = false } = this.props;
+		const { done } = this.state;
+		return (
+			<Typography component="div">
+				<ListItem role={undefined} button className="todo-list-item">
+					<ListItemText
+						disableTypography
+						className={ClassNames(
+							important ? classes.listItemTextImportant : classes.listItemTextNormal,
+							done ? classes.listItemTextCompleted : classes.listItemTextNotCompleted
+						)}
+						primary={label}
+						onClick={this.onLableClick}
+					/>
+					<ListItemSecondaryAction>
+						<IconButton>
+							<StarIconBorder />
+						</IconButton>
+						<IconButton>
+							<DeleteIcon />
+						</IconButton>
+					</ListItemSecondaryAction>
+				</ListItem>
+			</Typography>
+		);
+	}
+}
 
 export default withStyles(styles)(TodoListItem);
