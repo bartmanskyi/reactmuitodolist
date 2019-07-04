@@ -12,6 +12,7 @@ const TodoList = () => {
 		{ id: 2, label: 'Git Commit', important: false },
 		{ id: 3, label: 'Git Push', important: false }
 	];
+	const {toDo, done} = {toDo: 1, done: 3};
 	const elements = todos.map((item) => {
 		const { id, ...itemProps } = item;
 		return <TodoListItem {...itemProps} key={id} />;
@@ -21,7 +22,7 @@ const TodoList = () => {
 			className="todo-list"
 			subheader={
 				<ListSubheader component="div" id="nested-list-subheader">
-					1 more to do, 3 done
+					{toDo} more to do, {done} done
 				</ListSubheader>
 			}
 		>
