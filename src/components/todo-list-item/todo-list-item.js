@@ -6,18 +6,18 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/DeleteOutline';
 import StarIconBorder from '@material-ui/icons/StarBorder';
-import Typography from '@material-ui/core/Typography';
+// import Typography from '@material-ui/core/Typography';
 
 import './todo-list-item.css';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
 	listItemTextImportant: {
-		fontWeight: 500,
+		fontWeight: 600,
 		color: '#2196f3'
 	},
 	listItemTextNormal: {
-		fontWeight: 300
+		fontWeight: 400
 	},
 	listItemTextCompleted: {
 		textDecoration: 'line-through'
@@ -27,41 +27,49 @@ const styles = (theme) => ({
 	}
 });
 class TodoListItem extends Component {
-	constructor() {
-		super();
-		this.onLableClick = () => {
-			console.log(`Done: ${this.props.label}`);
-		};
-		this.state = {
-			done: false
-		};
-	}
+	state = {
+		done: false,
+		important: false
+	};
+
+	onLableClick = () => {
+		this.setState(({ done }) => {
+			return {
+				done: !done
+			};
+		});
+	};
+
+	onMarkImportant = () => {
+		this.setState(({ important }) => {
+			return {
+				important: !important
+			};
+		});
+	};
 
 	render() {
-		const { classes, label, important = false } = this.props;
-		const { done } = this.state;
+		const { classes, label } = this.props;
+		const { done, important } = this.state;
 		return (
-			<Typography component="div">
-				<ListItem role={undefined} button className="todo-list-item">
-					<ListItemText
-						disableTypography
-						className={ClassNames(
-							important ? classes.listItemTextImportant : classes.listItemTextNormal,
-							done ? classes.listItemTextCompleted : classes.listItemTextNotCompleted
-						)}
-						primary={label}
-						onClick={this.onLableClick}
-					/>
-					<ListItemSecondaryAction>
-						<IconButton>
-							<StarIconBorder />
-						</IconButton>
-						<IconButton>
-							<DeleteIcon />
-						</IconButton>
-					</ListItemSecondaryAction>
-				</ListItem>
-			</Typography>
+			<ListItem role={undefined} button className="todo-list-item" onClick={this.onLableClick}>
+				<ListItemText
+					disableTypography
+					className={ClassNames(
+						important ? classes.listItemTextImportant : classes.listItemTextNormal,
+						done ? classes.listItemTextCompleted : classes.listItemTextNotCompleted
+					)}
+					primary={label}
+				/>
+				<ListItemSecondaryAction>
+					<IconButton onClick={this.onMarkImportant}>
+						<StarIconBorder />
+					</IconButton>
+					<IconButton>
+						<DeleteIcon />
+					</IconButton>
+				</ListItemSecondaryAction>
+			</ListItem>
 		);
 	}
 }
