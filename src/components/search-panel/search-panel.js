@@ -6,6 +6,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 // import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
+//import ButtonGroup from '@material-ui/core/ButtonGroup';
 // import SearchIcon from '@material-ui/icons/Search';
 // import DirectionsIcon from '@material-ui/icons/Directions';
 
@@ -45,12 +46,19 @@ function CustomizedInputBase(props) {
 			<Button size="small" color="primary">
 				All
 			</Button>
-			<Button size="small" color="primary">
+			<Button size="small">
 				Active
 			</Button>
-			<Button size="small" color="primary">
+			<Button size="small">
 				Done
 			</Button>
+
+			
+			{/* <ButtonGroup size="small" color="primary" aria-label="Small outlined button group">
+              <Button>One</Button>
+              <Button>Two</Button>
+              <Button>Three</Button>
+            </ButtonGroup> */}
 			{/* <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
         <DirectionsIcon />
       </IconButton> */}

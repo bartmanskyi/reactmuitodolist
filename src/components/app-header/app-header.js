@@ -8,9 +8,6 @@ const AppHeader = () => {
 			<Typography variant="h4" gutterBottom>
 				Todo List
 			</Typography>
-			<Typography variant="subtitle2" gutterBottom>
-				1 more to do, 3 done
-			</Typography>
 		</div>
 	);
 };

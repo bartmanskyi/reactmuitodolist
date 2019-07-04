@@ -13,18 +13,19 @@ import './todo-list-item.css';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
-	listItemTextBold: {
-		fontWeight: 500
+	listItemTextImportant: {
+		fontWeight: 500,
+		color: '#2196f3'
 	},
 	listItemTextNormal: {
-		fontWeight: 300
-	}
+		fontWeight: 300,
+	},
 });
 
 const TodoListItem = ({ classes, label, important = false }) => {
-	const listItemStyle = {
-		color: important ? 'tomato' : 'black'
-	};
+	// const listItemStyle = {
+	// 	color: important ? 'primary' : 'black'
+	// };
 
 	return (
 		// <ListItem key={value} role={undefined} dense button onClick={this.handleToggle(value)}>
@@ -40,13 +41,12 @@ const TodoListItem = ({ classes, label, important = false }) => {
 			<ListItem
 				role={undefined}
 				button
-				style={listItemStyle}
 				className="todo-list-item"
 			>
 				{/* <ListItemIcon>
 				<StarIconBorder />
 			</ListItemIcon> */}
-				<ListItemText primary={label} classes={{ primary: important ? classes.listItemTextBold : classes.listItemTextNormal }}/>
+				<ListItemText primary={label} classes={{ primary: important ? classes.listItemTextImportant : classes.listItemTextNormal }}/>
 				<ListItemSecondaryAction>
 					<IconButton>
 						<StarIconBorder />

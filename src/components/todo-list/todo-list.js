@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoListItem from '../todo-list-item';
 import List from '@material-ui/core/List';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import './todo-list.css';
 
@@ -15,6 +16,17 @@ const TodoList = () => {
 		const { id, ...itemProps } = item;
 		return <TodoListItem {...itemProps} key={id} />;
 	});
-	return <List className="todo-list">{elements}</List>;
+	return (
+		<List
+			className="todo-list"
+			subheader={
+				<ListSubheader component="div" id="nested-list-subheader">
+					1 more to do, 3 done
+				</ListSubheader>
+			}
+		>
+			{elements}
+		</List>
+	);
 };
 export default TodoList;
