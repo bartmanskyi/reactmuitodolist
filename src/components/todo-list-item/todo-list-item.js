@@ -49,7 +49,7 @@ class TodoListItem extends Component {
 	};
 
 	render() {
-		const { classes, label } = this.props;
+		const { classes, label, onDeleted } = this.props;
 		const { done, important } = this.state;
 		return (
 			<ListItem role={undefined} button className="todo-list-item" onClick={this.onLableClick}>
@@ -65,7 +65,7 @@ class TodoListItem extends Component {
 					<IconButton onClick={this.onMarkImportant}>
 						<StarIconBorder />
 					</IconButton>
-					<IconButton>
+					<IconButton onClick={onDeleted}>
 						<DeleteIcon />
 					</IconButton>
 				</ListItemSecondaryAction>

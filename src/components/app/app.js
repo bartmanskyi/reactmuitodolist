@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
+import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
 
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
+import ItemAddForm from '../item-add-form';
 
 
 import { withStyles } from '@material-ui/core/styles';
@@ -31,48 +31,44 @@ const styles = (theme) => ({
 	list: {
 		width: '100%',
 		maxWidth: 480
-	},
+	}
 	// dense: {
 	// 	marginTop: 16
 	// }
 });
 
-class Index extends React.Component {
+class Index extends Component {
 	state = {
-		checked: [ 0 ]
+		checked: [ 0 ],
+		todoData: [
+			{ id: 0, label: 'Drink Coffee', important: false },
+			{ id: 1, label: 'Build React App', important: true },
+			{ id: 2, label: 'Git Commit', important: false },
+			{ id: 3, label: 'Git Push', important: false }
+		]
 	};
 
-	handleToggle = (value) => () => {
-		const { checked } = this.state;
-		const currentIndex = checked.indexOf(value);
-		const newChecked = [ ...checked ];
-
-		if (currentIndex === -1) {
-			newChecked.push(value);
-		} else {
-			newChecked.splice(currentIndex, 1);
-		}
-
-		this.setState({
-			checked: newChecked
+	deleteItem = (id) => {
+		this.setState(({ todoData }) => {
+			const idx = todoData.findIndex((el) => el.id === id);
+			const newTodoData = [ ...todoData.slice(0, idx), ...todoData.slice(idx + 1) ];
+			return {
+				todoData: newTodoData
+			};
 		});
 	};
 
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<div className={classes.root}>
 				<AppHeader />
 				<SearchPanel />
-				<TodoList />
+				<TodoList todos={this.state.todoData} onDeleted={this.deleteItem} />
+				<ItemAddForm />
 			</div>
 		);
 	}
 }
-
-Index.propTypes = {
-	classes: PropTypes.object.isRequired
-};
 
 export default withRoot(withStyles(styles)(Index));
