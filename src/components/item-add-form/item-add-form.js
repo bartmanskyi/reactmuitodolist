@@ -8,36 +8,41 @@ import Grid from '@material-ui/core/Grid';
 
 const styles = (theme) => ({
 	input: {
-    height: 40,
-    width: '100%'
+		height: 40,
+		width: '100%'
 	},
 	button: {
-    height: 40,
+		height: 40
 	}
 });
 
 const ItemAddForm = withStyles(styles)((props) => {
-	const { classes } = props;
+	const { classes, onItemAdded } = props;
 
 	return (
 		<div>
 			<Grid container direction="row">
 				<Grid item xs={10}>
 					<TextField
-            variant="outlined"
-            label="New task"
+						variant="outlined"
+						label="New task"
 						InputProps={{
 							className: classes.input
 						}}
 						InputLabelProps={{
 							shrink: true
 						}}
-            fullWidth
+						fullWidth
 					/>
 				</Grid>
 
-				<Grid item  xs={2}>
-					<Button variant="outlined" color="primary" className={classes.button}>
+				<Grid item xs={2}>
+					<Button
+						variant="outlined"
+						color="primary"
+						className={classes.button}
+						onClick={() => onItemAdded('hello world')}
+					>
 						Add
 					</Button>
 				</Grid>

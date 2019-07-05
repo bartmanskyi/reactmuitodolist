@@ -6,7 +6,6 @@ import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
 import ItemAddForm from '../item-add-form';
 
-
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot';
 
@@ -38,6 +37,8 @@ const styles = (theme) => ({
 });
 
 class Index extends Component {
+	maxId = 100;
+
 	state = {
 		checked: [ 0 ],
 		todoData: [
@@ -58,6 +59,20 @@ class Index extends Component {
 		});
 	};
 
+	addItem = (text) => {
+		const newItem = {
+			label: text,
+			important: false,
+			id: this.maxId++
+		};
+		this.setState(({ todoData }) => {
+			const newArray = [ ...todoData, newItem ];
+			return {
+				todoData: newArray
+			};
+		});
+	};
+
 	render() {
 		const { classes } = this.props;
 		return (
@@ -65,7 +80,7 @@ class Index extends Component {
 				<AppHeader />
 				<SearchPanel />
 				<TodoList todos={this.state.todoData} onDeleted={this.deleteItem} />
-				<ItemAddForm />
+				<ItemAddForm onItemAdded={this.addItem} />
 			</div>
 		);
 	}
