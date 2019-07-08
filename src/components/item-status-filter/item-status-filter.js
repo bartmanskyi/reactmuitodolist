@@ -4,16 +4,20 @@ import Button from '@material-ui/core/Button';
 import './item-status-filter.css';
 
 class ItemStatusFilter extends Component {
+	buttons = [ { name: 'all', label: 'All' }, { name: 'active', label: 'Active' }, { name: 'done', label: 'Done' } ];
+
 	render() {
-		return (
-			<div>
-				<Button size="small" color="primary">
-					All
+		const { filter, onFilterChange } = this.props;
+		const buttons = this.buttons.map(({ name, label }) => {
+			const isActive = filter === name;
+			const color = isActive ? 'primary' : 'default';
+			return (
+				<Button size="small" color={color} key={name} onClick={() => onFilterChange(name)}>
+					{label}
 				</Button>
-				<Button size="small">Active</Button>
-				<Button size="small">Done</Button>
-			</div>
-		);
+			);
+		});
+		return <div>{buttons}</div>;
 	}
 }
 

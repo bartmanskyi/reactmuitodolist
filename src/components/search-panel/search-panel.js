@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -27,16 +27,30 @@ const styles = {
 	}
 };
 
-function CustomizedInputBase(props) {
-	const { classes } = props;
-
-	return (
-		<Paper className={classes.root} elevation={1}>
-			<InputBase className={classes.input} placeholder="type to search" />
-			<Divider className={classes.divider} />
-			<ItemStatusFilter />
-		</Paper>
-	);
+class SearchPanel extends Component {
+	state = {
+		term: ''
+	};
+	onSearchChange = (e) => {
+		const term = e.target.value;
+		this.setState({ term });
+		this.props.onSearchChange(term);
+	};
+	render() {
+		const { classes, filter, onFilterChange } = this.props;
+		return (
+			<Paper className={classes.root} elevation={1}>
+				<InputBase
+					className={classes.input}
+					placeholder="Type to search"
+					onChange={this.onSearchChange}
+					value={this.state.term}
+				/>
+				<Divider className={classes.divider} />
+				<ItemStatusFilter filter={filter} onFilterChange={onFilterChange} />
+			</Paper>
+		);
+	}
 }
 
-export default withStyles(styles)(CustomizedInputBase);
+export default withStyles(styles)(SearchPanel);

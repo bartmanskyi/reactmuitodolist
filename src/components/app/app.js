@@ -29,7 +29,7 @@ const styles = (theme) => ({
 	}
 });
 
-class Index extends Component {
+class App extends Component {
 	maxId = 100;
 	state = {
 		todoData: [
@@ -38,7 +38,9 @@ class Index extends Component {
 			this.createTodoItem('Git Commit'),
 			this.createTodoItem('Git Push'),
 			this.createTodoItem('Have a lunch')
-		]
+		],
+		term: '',
+		filter: 'all'
 	};
 
 	createTodoItem(label) {
@@ -93,14 +95,44 @@ class Index extends Component {
 		});
 	};
 
+	onSearchChange = (term) => {
+		this.setState({ term });
+	};
+
+	onFilterChange = (filter) => {
+		this.setState({ filter });
+	};
+
+	search(items, term) {
+		if (term.length === 0) return items;
+		return items.filter((el) => {
+			return el.label.toLowerCase().indexOf(term.toLowerCase()) > -1;
+		});
+	}
+
+	filter(items, filter) {
+		switch (filter) {
+			case 'all':
+				return items;
+			case 'active':
+				return items.filter((item) => !item.done);
+			case 'done':
+				return items.filter((item) => item.done);
+			default:
+				return items;
+		}
+	}
+
 	render() {
 		const { classes } = this.props;
+		const { todoData, term, filter } = this.state;
+		const visibleItems = this.filter(this.search(todoData, term), filter);
 		return (
 			<div className={classes.root}>
 				<AppHeader />
-				<SearchPanel />
+				<SearchPanel onSearchChange={this.onSearchChange} filter={filter} onFilterChange={this.onFilterChange}/>
 				<TodoList
-					todos={this.state.todoData}
+					todos={visibleItems}
 					onDeleted={this.deleteItem}
 					onToggleImportant={this.onToggleImportant}
 					onToggleDone={this.onToggleDone}
@@ -111,4 +143,4 @@ class Index extends Component {
 	}
 }
 
-export default withRoot(withStyles(styles)(Index));
+export default withRoot(withStyles(styles)(App));
