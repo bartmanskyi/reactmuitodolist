@@ -24,7 +24,7 @@ const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
 		<List
 			className="todo-list"
 			subheader={
-				<ListSubheader component="div" id="nested-list-subheader">
+				<ListSubheader component="div">
 					{todoCount} more to do, {doneCount} done
 				</ListSubheader>
 			}

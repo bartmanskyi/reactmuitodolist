@@ -30,7 +30,7 @@ class TodoListItem extends Component {
 	render() {
 		const { classes, label, onDeleted, onToggleImportant, onToggleDone, done, important } = this.props;
 		return (
-			<ListItem role={undefined} button className="todo-list-item" onClick={onToggleDone}>
+			<ListItem button className="todo-list-item" onClick={onToggleDone}>
 				<ListItemText
 					disableTypography
 					className={ClassNames(
