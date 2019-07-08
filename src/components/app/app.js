@@ -130,7 +130,11 @@ class App extends Component {
 		return (
 			<div className={classes.root}>
 				<AppHeader />
-				<SearchPanel onSearchChange={this.onSearchChange} filter={filter} onFilterChange={this.onFilterChange}/>
+				<SearchPanel
+					onSearchChange={this.onSearchChange}
+					filter={filter}
+					onFilterChange={this.onFilterChange}
+				/>
 				<TodoList
 					todos={visibleItems}
 					onDeleted={this.deleteItem}
