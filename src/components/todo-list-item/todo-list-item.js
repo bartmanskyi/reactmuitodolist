@@ -27,32 +27,10 @@ const styles = (theme) => ({
 	}
 });
 class TodoListItem extends Component {
-	state = {
-		done: false,
-		important: false
-	};
-
-	onLableClick = () => {
-		this.setState(({ done }) => {
-			return {
-				done: !done
-			};
-		});
-	};
-
-	onMarkImportant = () => {
-		this.setState(({ important }) => {
-			return {
-				important: !important
-			};
-		});
-	};
-
 	render() {
-		const { classes, label, onDeleted } = this.props;
-		const { done, important } = this.state;
+		const { classes, label, onDeleted, onToggleImportant, onToggleDone, done, important } = this.props;
 		return (
-			<ListItem role={undefined} button className="todo-list-item" onClick={this.onLableClick}>
+			<ListItem role={undefined} button className="todo-list-item" onClick={onToggleDone}>
 				<ListItemText
 					disableTypography
 					className={ClassNames(
@@ -62,7 +40,7 @@ class TodoListItem extends Component {
 					primary={label}
 				/>
 				<ListItemSecondaryAction>
-					<IconButton onClick={this.onMarkImportant}>
+					<IconButton onClick={onToggleImportant}>
 						<StarIconBorder />
 					</IconButton>
 					<IconButton onClick={onDeleted}>

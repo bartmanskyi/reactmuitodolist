@@ -5,19 +5,27 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 
 import './todo-list.css';
 
-const TodoList = ({todos, onDeleted}) => {
-
-	const {toDo, done} = {toDo: 1, done: 3};
+const TodoList = ({ todos, onDeleted, onToggleImportant, onToggleDone }) => {
+	const doneCount = todos.filter((el) => el.done).length;
+	const todoCount = todos.length - doneCount;
 	const elements = todos.map((item) => {
 		const { id, ...itemProps } = item;
-		return <TodoListItem {...itemProps} key={id} onDeleted={() => onDeleted(id)} />;
+		return (
+			<TodoListItem
+				{...itemProps}
+				key={id}
+				onDeleted={() => onDeleted(id)}
+				onToggleImportant={() => onToggleImportant(id)}
+				onToggleDone={() => onToggleDone(id)}
+			/>
+		);
 	});
 	return (
 		<List
 			className="todo-list"
 			subheader={
 				<ListSubheader component="div" id="nested-list-subheader">
-					{toDo} more to do, {done} done
+					{todoCount} more to do, {doneCount} done
 				</ListSubheader>
 			}
 		>

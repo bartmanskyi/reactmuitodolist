@@ -21,8 +21,8 @@ const ItemAddForm = withStyles(styles)((props) => {
 
 	return (
 		<div>
-			<Grid container direction="row">
-				<Grid item xs={10}>
+			<Grid container direction="row" spacing={1}>
+				<Grid item xs={9} sm={10}>
 					<TextField
 						variant="outlined"
 						label="New task"
@@ -36,7 +36,7 @@ const ItemAddForm = withStyles(styles)((props) => {
 					/>
 				</Grid>
 
-				<Grid item xs={2}>
+				<Grid item xs={3} sm={2}>
 					<Button
 						variant="outlined"
 						color="primary"

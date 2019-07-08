@@ -12,7 +12,7 @@ import withRoot from './withRoot';
 const styles = (theme) => ({
 	root: {
 		textAlign: 'center',
-		paddingTop: theme.spacing(20),
+		paddingTop: theme.spacing(5),
 		width: 'auto',
 		display: 'block', // Fix IE 11 issue.
 		marginLeft: theme.spacing(3),
@@ -23,31 +23,32 @@ const styles = (theme) => ({
 			marginRight: 'auto'
 		}
 	},
-	// container: {
-	// 	display: 'flex',
-	// 	flexWrap: 'wrap'
-	// },
 	list: {
 		width: '100%',
 		maxWidth: 480
 	}
-	// dense: {
-	// 	marginTop: 16
-	// }
 });
 
 class Index extends Component {
 	maxId = 100;
-
 	state = {
-		checked: [ 0 ],
 		todoData: [
-			{ id: 0, label: 'Drink Coffee', important: false },
-			{ id: 1, label: 'Build React App', important: true },
-			{ id: 2, label: 'Git Commit', important: false },
-			{ id: 3, label: 'Git Push', important: false }
+			this.createTodoItem('Drink Coffee'),
+			this.createTodoItem('Build React App'),
+			this.createTodoItem('Git Commit'),
+			this.createTodoItem('Git Push'),
+			this.createTodoItem('Have a lunch')
 		]
 	};
+
+	createTodoItem(label) {
+		return {
+			label,
+			done: false,
+			important: false,
+			id: this.maxId++
+		};
+	}
 
 	deleteItem = (id) => {
 		this.setState(({ todoData }) => {
@@ -60,15 +61,34 @@ class Index extends Component {
 	};
 
 	addItem = (text) => {
-		const newItem = {
-			label: text,
-			important: false,
-			id: this.maxId++
-		};
+		const newItem = this.createTodoItem(text);
 		this.setState(({ todoData }) => {
 			const newArray = [ ...todoData, newItem ];
 			return {
 				todoData: newArray
+			};
+		});
+	};
+
+	toggleProperty(arr, id, propertyName) {
+		const idx = arr.findIndex((el) => el.id === id);
+		const oldItem = arr[idx];
+		const newItem = { ...oldItem, [propertyName]: !oldItem[propertyName] };
+		return [ ...arr.slice(0, idx), newItem, ...arr.slice(idx + 1) ];
+	}
+
+	onToggleDone = (id) => {
+		this.setState(({ todoData }) => {
+			return {
+				todoData: this.toggleProperty(todoData, id, 'done')
+			};
+		});
+	};
+
+	onToggleImportant = (id) => {
+		this.setState(({ todoData }) => {
+			return {
+				todoData: this.toggleProperty(todoData, id, 'important')
 			};
 		});
 	};
@@ -79,7 +99,12 @@ class Index extends Component {
 			<div className={classes.root}>
 				<AppHeader />
 				<SearchPanel />
-				<TodoList todos={this.state.todoData} onDeleted={this.deleteItem} />
+				<TodoList
+					todos={this.state.todoData}
+					onDeleted={this.deleteItem}
+					onToggleImportant={this.onToggleImportant}
+					onToggleDone={this.onToggleDone}
+				/>
 				<ItemAddForm onItemAdded={this.addItem} />
 			</div>
 		);
