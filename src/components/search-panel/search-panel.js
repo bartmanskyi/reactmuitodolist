@@ -11,7 +11,7 @@ const styles = {
 		padding: '8px 8px',
 		display: 'flex',
 		alignItems: 'center',
-		maxWidth: 480
+		maxWidth: '100%'
 	},
 	input: {
 		marginLeft: 8,

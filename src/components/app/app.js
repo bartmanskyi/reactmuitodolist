@@ -5,7 +5,8 @@ import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
 import TodoList from '../todo-list';
 import ItemAddForm from '../item-add-form';
-
+import AppFooter from '../app-footer';
+import Container from '@material-ui/core/Container';
 import { withStyles } from '@material-ui/core/styles';
 import withRoot from './withRoot';
 
@@ -18,7 +19,6 @@ const styles = (theme) => ({
 		marginLeft: theme.spacing(3),
 		marginRight: theme.spacing(3),
 		[theme.breakpoints.up(480 + theme.spacing(3) * 2)]: {
-			maxWidth: 480,
 			marginLeft: 'auto',
 			marginRight: 'auto'
 		}
@@ -129,19 +129,22 @@ class App extends Component {
 		const visibleItems = this.filter(this.search(todoData, term), filter);
 		return (
 			<div className={classes.root}>
-				<AppHeader />
-				<SearchPanel
-					onSearchChange={this.onSearchChange}
-					filter={filter}
-					onFilterChange={this.onFilterChange}
-				/>
-				<TodoList
-					todos={visibleItems}
-					onDeleted={this.deleteItem}
-					onToggleImportant={this.onToggleImportant}
-					onToggleDone={this.onToggleDone}
-				/>
-				<ItemAddForm onItemAdded={this.addItem} />
+				<Container component="main" maxWidth="sm">
+					<AppHeader />
+					<SearchPanel
+						onSearchChange={this.onSearchChange}
+						filter={filter}
+						onFilterChange={this.onFilterChange}
+					/>
+					<TodoList
+						todos={visibleItems}
+						onDeleted={this.deleteItem}
+						onToggleImportant={this.onToggleImportant}
+						onToggleDone={this.onToggleDone}
+					/>
+					<ItemAddForm onItemAdded={this.addItem} />
+					<AppFooter />
+				</Container>
 			</div>
 		);
 	}
