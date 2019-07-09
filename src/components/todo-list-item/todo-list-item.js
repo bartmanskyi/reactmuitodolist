@@ -24,9 +24,33 @@ const styles = (theme) => ({
 	},
 	listItemTextNotCompleted: {
 		textDecoration: 'none'
-	}
+	},
+	overImportant: {
+		color: '#2196f3'
+	},
+	outImportant: {},
+	overRemove: {
+		color: '#f44336'
+	},
+	outRemove: {}
 });
 class TodoListItem extends Component {
+	state = {
+		overImportant: false,
+		overRemove: false
+	};
+	onMouseOverImportant = () => {
+		this.setState({ overImportant: true });
+	};
+	onMouseOutImportant = () => {
+		this.setState({ overImportant: false });
+	};
+	onMouseOverRemove = () => {
+		this.setState({ overRemove: true });
+	};
+	onMouseOutRemove = () => {
+		this.setState({ overRemove: false });
+	};
 	render() {
 		const { classes, label, onDeleted, onToggleImportant, onToggleDone, done, important } = this.props;
 		return (
@@ -40,10 +64,21 @@ class TodoListItem extends Component {
 					primary={label}
 				/>
 				<ListItemSecondaryAction>
-					<IconButton onClick={onToggleImportant}>
+					<IconButton
+						onClick={onToggleImportant}
+						onMouseOver={this.onMouseOverImportant}
+						onMouseOut={this.onMouseOutImportant}
+						color={important ? 'primary' : 'default'}
+						className={this.state.overImportant ? classes.overImportant : classes.outImportant}
+					>
 						<StarIconBorder />
 					</IconButton>
-					<IconButton onClick={onDeleted}>
+					<IconButton
+						onClick={onDeleted}
+						onMouseOver={this.onMouseOverRemove}
+						onMouseOut={this.onMouseOutRemove}
+						className={this.state.overRemove ? classes.overRemove : classes.outRemove}
+					>
 						<DeleteIcon />
 					</IconButton>
 				</ListItemSecondaryAction>
